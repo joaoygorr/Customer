@@ -27,4 +27,10 @@ public class Address {
     private String postalCode;
 
     private String country;
+
+    public Address(Long id, String city, String postalCode) {
+        this.id = id;
+        this.city = city;
+        this.postalCode = postalCode;
+    }
 }

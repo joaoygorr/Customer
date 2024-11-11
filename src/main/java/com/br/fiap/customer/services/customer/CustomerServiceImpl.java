@@ -31,4 +31,10 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new Exception404("Cliente com o id " + categoryId + " não encontrado!"));
         return CustomerDTO.toDto(customer);
     }
+
+    @Override
+    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+        Customer category = this.customerRepository.save(CustomerDTO.toEntity(customerDTO));
+        return CustomerDTO.toDto(category);
+    }
 }

@@ -9,4 +9,6 @@ public interface CustomerService {
     Page<CustomerDTO> getAllCustomer(Pageable pageable);
 
     CustomerDTO getCustomerById(Long customerId);
+
+    CustomerDTO createCustomer(CustomerDTO customerDTO);
 }

@@ -37,4 +37,11 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_address")
     private Address address;
+
+    public Customer(Long id, String firstName, String lastName, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+    }
 }
