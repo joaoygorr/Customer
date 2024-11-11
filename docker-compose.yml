@@ -1,0 +1,12 @@
+services:
+  java_db:
+    container_name: java_db
+    restart: always
+    image: postgres
+
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "customer"
+      POSTGRES_DB: "customer"
+      POSTGRES_PASSWORD: "SuperPassword@2"
