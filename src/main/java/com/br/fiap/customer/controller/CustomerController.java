@@ -45,4 +45,11 @@ public class CustomerController {
         CustomerCreateDTO createCustomer  = this.customerService.createCustomer(customerCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createCustomer);
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete customer", description = "Delete a customer by id")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        this.customerService.deleteCustomerById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

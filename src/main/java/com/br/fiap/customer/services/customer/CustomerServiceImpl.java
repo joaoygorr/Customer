@@ -38,4 +38,13 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = this.customerRepository.save(CustomerCreateDTO.toEntity(customerCreateDTO));
         return CustomerCreateDTO.toDto(customer);
     }
+
+    @Override
+    public void deleteCustomerById(Long id) {
+        if (customerRepository.existsById(id)) {
+            this.customerRepository.deleteById(id);
+        } else {
+            throw new Exception404("Cliente com o id " + id + " não encontrado!");
+        }
+    }
 }
