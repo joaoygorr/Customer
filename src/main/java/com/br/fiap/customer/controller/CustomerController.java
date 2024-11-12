@@ -1,5 +1,6 @@
 package com.br.fiap.customer.controller;
 
+import com.br.fiap.customer.record.customer.CustomerCreateDTO;
 import com.br.fiap.customer.record.customer.CustomerDTO;
 import com.br.fiap.customer.services.customer.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,8 +41,8 @@ public class CustomerController {
 
     @PostMapping
     @Operation(summary = "Create customer", description = "Creating a customer")
-    public ResponseEntity<CustomerDTO> postCategory(@RequestBody @Valid CustomerDTO customerDTO) {
-        CustomerDTO createCustomer  = this.customerService.createCustomer(customerDTO);
+    public ResponseEntity<CustomerCreateDTO> postCategory(@RequestBody @Valid CustomerCreateDTO customerCreateDTO) {
+        CustomerCreateDTO createCustomer  = this.customerService.createCustomer(customerCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createCustomer);
     }
 }

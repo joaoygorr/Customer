@@ -2,6 +2,7 @@ package com.br.fiap.customer.services.customer;
 
 import com.br.fiap.customer.exceptions.Exception404;
 import com.br.fiap.customer.module.Customer;
+import com.br.fiap.customer.record.customer.CustomerCreateDTO;
 import com.br.fiap.customer.record.customer.CustomerDTO;
 import com.br.fiap.customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        Customer category = this.customerRepository.save(CustomerDTO.toEntity(customerDTO));
-        return CustomerDTO.toDto(category);
+    public CustomerCreateDTO createCustomer(CustomerCreateDTO customerCreateDTO) {
+        Customer customer = this.customerRepository.save(CustomerCreateDTO.toEntity(customerCreateDTO));
+        return CustomerCreateDTO.toDto(customer);
     }
 }

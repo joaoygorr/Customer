@@ -1,5 +1,6 @@
 package com.br.fiap.customer.services.customer;
 
+import com.br.fiap.customer.record.customer.CustomerCreateDTO;
 import com.br.fiap.customer.record.customer.CustomerDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,5 +11,5 @@ public interface CustomerService {
 
     CustomerDTO getCustomerById(Long customerId);
 
-    CustomerDTO createCustomer(CustomerDTO customerDTO);
+    CustomerCreateDTO createCustomer(CustomerCreateDTO customerCreateDTO);
 }
