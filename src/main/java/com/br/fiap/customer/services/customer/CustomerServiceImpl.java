@@ -2,6 +2,7 @@ package com.br.fiap.customer.services.customer;
 
 import com.br.fiap.customer.exceptions.Exception404;
 import com.br.fiap.customer.module.Customer;
+import com.br.fiap.customer.record.address.AddressCreateDTO;
 import com.br.fiap.customer.record.customer.CustomerCreateDTO;
 import com.br.fiap.customer.record.customer.CustomerDTO;
 import com.br.fiap.customer.repository.CustomerRepository;
@@ -46,5 +47,19 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             throw new Exception404("Cliente com o id " + id + " não encontrado!");
         }
+    }
+
+    @Override
+    public CustomerCreateDTO editCustomer(Long id, CustomerCreateDTO customerCreateDTO) {
+        Customer existingCustomer = customerRepository.findById(id)
+                .orElseThrow(() -> new Exception404("Cliente não encontrado com ID: " + id));
+
+        existingCustomer.setFirstName(customerCreateDTO.firstName());
+        existingCustomer.setLastName(customerCreateDTO.lastName());
+        existingCustomer.setAddress(AddressCreateDTO.toEntity(customerCreateDTO.address()));
+
+        Customer updatedCustomer = customerRepository.save(existingCustomer);
+
+        return CustomerCreateDTO.toDto(updatedCustomer);
     }
 }

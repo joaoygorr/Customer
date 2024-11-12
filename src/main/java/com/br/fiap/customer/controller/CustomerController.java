@@ -52,4 +52,11 @@ public class CustomerController {
         this.customerService.deleteCustomerById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Edit customer", description = "Edit a customer by id")
+    public ResponseEntity<CustomerCreateDTO> editCustomer(@PathVariable Long id, @RequestBody @Valid CustomerCreateDTO customerCreateDTO) {
+        CustomerCreateDTO editCustomer = this.customerService.editCustomer(id, customerCreateDTO);
+        return ResponseEntity.ok(editCustomer);
+    }
 }
