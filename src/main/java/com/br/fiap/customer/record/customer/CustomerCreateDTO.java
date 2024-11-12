@@ -4,7 +4,6 @@ import com.br.fiap.customer.module.Customer;
 import com.br.fiap.customer.record.address.AddressCreateDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record CustomerCreateDTO(
         @NotBlank(message = "Nome não pode estar em branco") String firstName,
