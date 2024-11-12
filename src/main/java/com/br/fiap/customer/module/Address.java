@@ -33,4 +33,9 @@ public class Address {
         this.city = city;
         this.postalCode = postalCode;
     }
+
+    public Address(String city, String postalCode) {
+        this.city = city;
+        this.postalCode = postalCode;
+    }
 }
