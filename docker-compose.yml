@@ -10,3 +10,16 @@ services:
       POSTGRES_USER: "customer"
       POSTGRES_DB: "customer"
       POSTGRES_PASSWORD: "SuperPassword@2"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - java_db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
