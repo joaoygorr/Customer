@@ -23,7 +23,6 @@ import org.springframework.data.domain.Pageable;
 import com.br.fiap.customer.exceptions.Exception404;
 import com.br.fiap.customer.mock.CustomerMock;
 import com.br.fiap.customer.module.Customer;
-import com.br.fiap.customer.record.customer.CustomerCreateDTO;
 import com.br.fiap.customer.repository.CustomerRepository;
 
 class CustomerServiceImplTest {
@@ -44,14 +43,14 @@ class CustomerServiceImplTest {
     void testCreateCustomer() {
         when(this.customerRepository.save(any(Customer.class))).thenReturn(CustomerMock.mock());
 
-        final var response = this.customerService.createCustomer(CustomerCreateDTO.toDto(CustomerMock.mock()));
+        final var response = this.customerService.createCustomer(CustomerMock.mock());
 
         assertNotNull(response);
     }
 
     @Test
-    void testDeleteCustomerByIdSuccess() {
-        when(this.customerRepository.existsById(anyLong())).thenReturn(true);
+    void testDeleteCustomerById() {
+        when(this.customerRepository.findById(anyLong())).thenReturn(Optional.of(CustomerMock.mock()));
 
         this.customerService.deleteCustomerById(1L);
 
@@ -59,21 +58,11 @@ class CustomerServiceImplTest {
     }
 
     @Test
-    void testDeleteCustomerByIdFailed() {
-        when(this.customerRepository.existsById(anyLong())).thenReturn(false);
-
-        final var error = assertThrows(Exception404.class, () -> this.customerService.deleteCustomerById(1L));
-
-        assertNotNull(error);
-        assertEquals("Cliente com o id 1 não encontrado!", error.getMessage());
-    }
-
-    @Test
     void testEditCustomer() {
         when(this.customerRepository.findById(anyLong())).thenReturn(Optional.of(CustomerMock.mock()));
         when(this.customerRepository.save(any(Customer.class))).thenReturn(CustomerMock.mock());
 
-        final var response = this.customerService.editCustomer(1l, CustomerCreateDTO.toDto(CustomerMock.mock()));
+        final var response = this.customerService.editCustomer(1l, CustomerMock.mock());
 
         assertNotNull(response);
     }

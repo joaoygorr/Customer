@@ -15,10 +15,4 @@ public record CustomerDTO(Long id,
                 AddressDTO.toDto(customer.getAddress()));
     }
 
-    public static Customer toEntity(CustomerDTO customerDTO) {
-        return new Customer(customerDTO.id,
-                customerDTO.firstName,
-                customerDTO.lastName,
-                AddressDTO.toEntity(customerDTO.address));
-    }
 }
