@@ -1,19 +1,18 @@
 package com.br.fiap.customer.services.customer;
 
-import com.br.fiap.customer.record.customer.CustomerCreateDTO;
-import com.br.fiap.customer.record.customer.CustomerDTO;
+import com.br.fiap.customer.module.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface CustomerService {
 
-    Page<CustomerDTO> getAllCustomer(Pageable pageable);
+    Page<Customer> getAllCustomer(Pageable pageable);
 
-    CustomerDTO getCustomerById(Long customerId);
+    Customer getCustomerById(Long customerId);
 
-    CustomerCreateDTO createCustomer(CustomerCreateDTO customerCreateDTO);
+    Customer createCustomer(Customer customer);
 
     void deleteCustomerById(Long id);
 
-    CustomerCreateDTO editCustomer(Long id, CustomerCreateDTO customerCreateDTO);
+    Customer editCustomer(Long id, Customer customer);
 }

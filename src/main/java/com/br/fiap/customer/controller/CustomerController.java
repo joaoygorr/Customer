@@ -28,35 +28,36 @@ public class CustomerController {
     @GetMapping
     @Operation(summary = "list all customers", description = "Returns a list of customers")
     public ResponseEntity<Page<CustomerDTO>> getAll(Pageable pageable) {
-        Page<CustomerDTO> getAllCustomer = this.customerService.getAllCustomer(pageable);
+        Page<CustomerDTO> getAllCustomer = this.customerService.getAllCustomer(pageable).map(CustomerDTO::toDto);
         return ResponseEntity.ok(getAllCustomer);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Search a customer", description = "Returns a customer based on id")
-    public ResponseEntity<CustomerDTO> getCategory(@PathVariable Long id) {
-        CustomerDTO getCustomer = this.customerService.getCustomerById(id);
-        return ResponseEntity.ok(getCustomer);
+    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable Long id) {
+        final var response = this.customerService.getCustomerById(id);
+        return ResponseEntity.ok(CustomerDTO.toDto(response));
     }
 
     @PostMapping
     @Operation(summary = "Create customer", description = "Creating a customer")
-    public ResponseEntity<CustomerCreateDTO> postCategory(@RequestBody @Valid CustomerCreateDTO customerCreateDTO) {
-        CustomerCreateDTO createCustomer  = this.customerService.createCustomer(customerCreateDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createCustomer);
+    public ResponseEntity<CustomerCreateDTO> postCustomer(@RequestBody @Valid CustomerCreateDTO customerCreateDTO) {
+        final var response = this.customerService.createCustomer(CustomerCreateDTO.toEntity(customerCreateDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(CustomerCreateDTO.toDto(response));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete customer", description = "Delete a customer by id")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         this.customerService.deleteCustomerById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Edit customer", description = "Edit a customer by id")
-    public ResponseEntity<CustomerCreateDTO> editCustomer(@PathVariable Long id, @RequestBody @Valid CustomerCreateDTO customerCreateDTO) {
-        CustomerCreateDTO editCustomer = this.customerService.editCustomer(id, customerCreateDTO);
-        return ResponseEntity.ok(editCustomer);
+    public ResponseEntity<CustomerCreateDTO> editCustomer(@PathVariable Long id,
+            @RequestBody @Valid CustomerCreateDTO customerCreateDTO) {
+        final var response = this.customerService.editCustomer(id, CustomerCreateDTO.toEntity(customerCreateDTO));
+        return ResponseEntity.ok(CustomerCreateDTO.toDto(response));
     }
 }

@@ -12,9 +12,4 @@ public record AddressDTO(Long id,
                 address.getPostalCode());
     }
 
-    public static Address toEntity(AddressDTO addressDTO) {
-        return new Address(addressDTO.id,
-                addressDTO.city,
-                addressDTO.postalCode);
-    }
 }
